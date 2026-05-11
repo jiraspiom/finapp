@@ -1,7 +1,7 @@
 // src/middleware/error-handler.ts
+import { Prisma } from "@prisma/client"
 import type { Context } from "hono"
 import { ZodError } from "zod"
-import { Prisma } from "@prisma/client"
 
 export function errorHandler(err: Error, c: Context) {
   console.error(err)
