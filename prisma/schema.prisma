@@ -18,12 +18,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  accounts     Account[]
-  categories   Category[]
-  transactions Transaction[]
-  budgets      Budget[]
-  goals        Goal[]
-  recurringTx  RecurringTransaction[]
+  accounts      Account[]
+  categories    Category[]
+  transactions  Transaction[]
+  budgets       Budget[]
+  goals         Goal[]
+  recurringTx   RecurringTransaction[]
   refreshTokens RefreshToken[]
 
   @@map("users")
@@ -42,37 +42,37 @@ model RefreshToken {
 }
 
 model Account {
-  id           String      @id @default(cuid())
-  userId       String
-  name         String
-  type         AccountType
-  balance      Decimal     @default(0) @db.Decimal(15, 2)
-  initialBalance Decimal   @default(0) @db.Decimal(15, 2)
-  color        String?
-  icon         String?
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id             String      @id @default(cuid())
+  userId         String
+  name           String
+  type           AccountType
+  balance        Decimal     @default(0) @db.Decimal(15, 2)
+  initialBalance Decimal     @default(0) @db.Decimal(15, 2)
+  color          String?
+  icon           String?
+  isActive       Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 
-  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  transactions        Transaction[]
-  transfersFrom       Transfer[]    @relation("TransferFrom")
-  transfersTo         Transfer[]    @relation("TransferTo")
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions  Transaction[]
+  transfersFrom Transfer[]    @relation("TransferFrom")
+  transfersTo   Transfer[]    @relation("TransferTo")
 
   @@map("accounts")
 }
 
 model Category {
-  id        String           @id @default(cuid())
+  id        String          @id @default(cuid())
   userId    String?
   name      String
   type      TransactionType
   color     String
   icon      String
-  isSystem  Boolean          @default(false)
-  createdAt DateTime         @default(now())
+  isSystem  Boolean         @default(false)
+  createdAt DateTime        @default(now())
 
-  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User?                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
   budgets      Budget[]
   recurringTx  RecurringTransaction[]
@@ -92,14 +92,15 @@ model Transaction {
   date        DateTime
   isRecurring Boolean         @default(false)
   recurringId String?
+  fitId       String?         @unique
   tags        String[]        @default([])
   attachments String[]        @default([])
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  account   Account  @relation(fields: [accountId], references: [id])
-  category  Category @relation(fields: [categoryId], references: [id])
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account   Account               @relation(fields: [accountId], references: [id])
+  category  Category              @relation(fields: [categoryId], references: [id])
   recurring RecurringTransaction? @relation(fields: [recurringId], references: [id])
 
   @@index([userId, date])
@@ -118,7 +119,7 @@ model Transfer {
   createdAt     DateTime @default(now())
 
   fromAccount Account @relation("TransferFrom", fields: [fromAccountId], references: [id])
-  toAccount   Account @relation("TransferTo",   fields: [toAccountId],   references: [id])
+  toAccount   Account @relation("TransferTo", fields: [toAccountId], references: [id])
 
   @@map("transfers")
 }
@@ -193,6 +194,7 @@ enum AccountType {
 enum TransactionType {
   INCOME
   EXPENSE
+  TRANSFER
 }
 
 enum GoalStatus {
