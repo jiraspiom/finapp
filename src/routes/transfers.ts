@@ -5,7 +5,7 @@ import { z } from "zod"
 import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 
-export const transferRoutes = new Hono()
+export const transferRoutes = new Hono<{ Variables: { userId: string } }>()
 transferRoutes.use("*", authenticate)
 
 const transferSchema = z.object({

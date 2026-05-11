@@ -4,7 +4,7 @@ import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 import dayjs from "dayjs"
 
-export const dashboardRoutes = new Hono()
+export const dashboardRoutes = new Hono<{ Variables: { userId: string } }>()
 dashboardRoutes.use("*", authenticate)
 
 // GET /api/v1/dashboard

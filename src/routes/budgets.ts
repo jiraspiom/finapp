@@ -5,7 +5,9 @@ import { z } from "zod"
 import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 
-export const budgetRoutes = new Hono()
+
+
+export const budgetRoutes = new Hono<{ Variables: { userId: string } }>()
 budgetRoutes.use("*", authenticate)
 
 const budgetSchema = z.object({

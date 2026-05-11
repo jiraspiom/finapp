@@ -6,7 +6,7 @@ import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 import { parsePagination, buildMeta } from "../utils/pagination"
 
-export const transactionRoutes = new Hono()
+export const transactionRoutes = new Hono<{ Variables: { userId: string } }>()
 transactionRoutes.use("*", authenticate)
 
 const transactionSchema = z.object({

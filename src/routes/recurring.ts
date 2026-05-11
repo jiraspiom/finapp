@@ -6,7 +6,7 @@ import dayjs from "dayjs"
 import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 
-export const recurringRoutes = new Hono()
+export const recurringRoutes = new Hono<{ Variables: { userId: string } }>()
 recurringRoutes.use("*", authenticate)
 
 const recurringSchema = z.object({

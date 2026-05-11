@@ -4,7 +4,7 @@ import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 import dayjs from "dayjs"
 
-export const reportRoutes = new Hono()
+export const reportRoutes = new Hono<{ Variables: { userId: string } }>()
 reportRoutes.use("*", authenticate)
 
 // GET /api/v1/reports/monthly?year=2024

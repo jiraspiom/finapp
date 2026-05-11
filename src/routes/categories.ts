@@ -5,7 +5,7 @@ import { z } from "zod"
 import { db } from "../utils/db"
 import { authenticate } from "../middleware/auth"
 
-export const categoryRoutes = new Hono()
+export const categoryRoutes = new Hono<{ Variables: { userId: string } }>()
 categoryRoutes.use("*", authenticate)
 
 const categorySchema = z.object({

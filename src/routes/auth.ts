@@ -8,7 +8,7 @@ import { signAccessToken, signRefreshToken, verifyRefreshToken } from "../utils/
 import { authenticate } from "../middleware/auth"
 import dayjs from "dayjs"
 
-export const authRoutes = new Hono()
+export const authRoutes = new Hono<{ Variables: { userId: string } }>()
 
 const registerSchema = z.object({
   name: z.string().min(2).max(100),

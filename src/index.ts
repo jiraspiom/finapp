@@ -1,5 +1,5 @@
 // src/index.ts
-import { Hono } from "hono"
+import { Env, Hono } from "hono"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { secureHeaders } from "hono/secure-headers"
