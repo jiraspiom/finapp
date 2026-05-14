@@ -1,9 +1,9 @@
 // src/routes/goals.ts
-import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
+import { Hono } from 'hono'
 import { z } from 'zod'
-import { db } from '../utils/db'
 import { authenticate } from '../middleware/auth'
+import { db } from '../utils/db'
 
 export const goalRoutes = new Hono<{ Variables: { userId: string } }>()
 goalRoutes.use('*', authenticate)

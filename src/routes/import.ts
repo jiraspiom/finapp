@@ -1,10 +1,10 @@
 // src/routes/import.ts
-import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
+import { Hono } from 'hono'
 import { z } from 'zod'
-import { db } from '../utils/db'
 import { authenticate } from '../middleware/auth'
-import { parseOFX, categorizeTransaction } from '../service/ofx-parser'
+import { categorizeTransaction, parseOFX } from '../services/ofxParser'
+import { db } from '../utils/db'
 
 export const importRoutes = new Hono<{ Variables: { userId: string } }>()
 importRoutes.use('*', authenticate)

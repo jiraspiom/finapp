@@ -1,8 +1,7 @@
-// src/routes/dashboard.ts
-import { Hono } from 'hono'
-import { db } from '../utils/db'
-import { authenticate } from '../middleware/auth'
 import dayjs from 'dayjs'
+import { Hono } from 'hono'
+import { authenticate } from '../middleware/auth'
+import { db } from '../utils/db'
 
 export const dashboardRoutes = new Hono<{ Variables: { userId: string } }>()
 dashboardRoutes.use('*', authenticate)
