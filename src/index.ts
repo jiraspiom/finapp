@@ -1,5 +1,5 @@
 // src/index.ts
-import { Env, Hono } from "hono"
+import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { secureHeaders } from "hono/secure-headers"
@@ -16,6 +16,7 @@ import { transferRoutes } from "./routes/transfers"
 import { recurringRoutes } from "./routes/recurring"
 import { dashboardRoutes } from "./routes/dashboard"
 import { reportRoutes } from "./routes/reports"
+import { importRoutes } from "./routes/import"
 import { env } from "./utils/env"
 
 const app = new Hono()
@@ -51,6 +52,7 @@ v1.route("/transfers", transferRoutes)
 v1.route("/recurring", recurringRoutes)
 v1.route("/dashboard", dashboardRoutes)
 v1.route("/reports", reportRoutes)
+v1.route("/import", importRoutes)
 
 app.route("/api/v1", v1)
 

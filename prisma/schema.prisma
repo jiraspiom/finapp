@@ -92,7 +92,6 @@ model Transaction {
   date        DateTime
   isRecurring Boolean         @default(false)
   recurringId String?
-  fitId       String?         @unique
   tags        String[]        @default([])
   attachments String[]        @default([])
   createdAt   DateTime        @default(now())
@@ -194,7 +193,6 @@ enum AccountType {
 enum TransactionType {
   INCOME
   EXPENSE
-  TRANSFER
 }
 
 enum GoalStatus {
