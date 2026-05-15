@@ -15,7 +15,8 @@
     "test": "bun test",
     "lint": "bunx @biomejs/biome check .",
     "format": "bunx @biomejs/biome format --write .",
-    "predeploy": "bun run db:generate && bun run build:compile"
+    "predeploy": "bun run db:generate && bun run build:compile",
+    "build:vercel": "prisma generate && prisma migrate deploy && bun build ./src/index.ts --outdir ./dist --target bun --minify"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.4.1",
